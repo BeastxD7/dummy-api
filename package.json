@@ -2,10 +2,10 @@
   "name": "rag-api",
   "version": "1.0.0",
   "description": "RAG API Server",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "node --watch src/index.js"
+    "start": "node index.js",
+    "dev": "node --watch index.js"
   },
   "keywords": [
     "rag",
