@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const ragRouter = require('./src/routes/rag');
+const ragRouter = require('./routes/rag');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,6 +14,20 @@ app.use(cors({
 
 // Middleware
 app.use(express.json());
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Dummy RAG API Server is running!',
+    status: 'active',
+    endpoints: {
+      health: '/health',
+      rag: '/rag (POST)'
+    },
+    description: 'A simple RAG (Retrieval-Augmented Generation) API for job-candidate matching',
+    timestamp: new Date().toISOString()
+  });
+});
 
 // Routes
 app.use('/rag', ragRouter);
@@ -32,6 +46,7 @@ app.use((err, req, res, next) => {
 // Start server
 app.listen(PORT, () => {
   console.log(`RAG API Server running on port ${PORT}`);
+  console.log(`Root endpoint: http://localhost:${PORT}/`);
   console.log(`Health check: http://localhost:${PORT}/health`);
   console.log(`RAG endpoint: http://localhost:${PORT}/rag`);
 });
